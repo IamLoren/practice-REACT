@@ -1,13 +1,12 @@
-import { BlogCard } from "./components/BlogCard";
-import { Header } from "./components/Header";
-import dataArticle from "./assets/article.json";
+import { BlogCard } from './components/BlogCard'
+import { Header } from './components/Header'
+import dataArticle from './assets/article.json'
 function App() {
-  return (
-    <div>
-      <Header title="Project-js" />
-      <BlogCard {...dataArticle} />
-    </div>
-  );
+	return (
+		<div>
+			<BlogCard {...dataArticle} />
+		</div>
+	)
 }
 
-export default App;
+export default App
