@@ -23,17 +23,14 @@
 ```jsx
 <div>
 	<div>
-		<img
-			src='https://source.unsplash.com/600x400/?computer'
-			alt='card__image'
-		/>
+		<img src='https://source.unsplash.com/600x400/?computer' alt='card__image' />
 	</div>
 	<div>
 		<h2>Technology</h2>
 		<h3>What's new in 2022 Tech</h3>
 		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi perferendis
-			molestiae non nemo doloribus. Doloremque, nihil! At ea atque quidem!
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi perferendis molestiae non nemo doloribus.
+			Doloremque, nihil! At ea atque quidem!
 		</p>
 	</div>
 	<div>
