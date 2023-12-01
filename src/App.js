@@ -1,8 +1,10 @@
-import { BlogCard } from "./components/BlogCard";
+import { BlogCard } from "./components/BlogCard/BlogCard";
+import "./styles.css";
+
 import { Header } from "./components/Header";
 import dataArticle from "./assets/article.json";
 import { Statistics } from "./components/Statistics";
-import dataStats from './assets/data.json'
+import dataStats from "./assets/data.json";
 
 function App() {
   return (
