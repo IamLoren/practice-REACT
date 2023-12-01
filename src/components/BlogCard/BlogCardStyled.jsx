@@ -1,28 +1,45 @@
-import { formatDistanceToNow } from 'date-fns'
+import {formatDistanceToNow} from 'date-fns'
 
-export const BlogCard = ({ avatar, description, name, postedAt, poster, tag, title }) => {
-	return (
-		<div>
-			<div>
-				<div>
-					<img src={poster} alt='card__image' />
-				</div>
-				<div>
-					<div>
-						<h2>{tag}</h2>
-						<h3>{title}</h3>
-						<p>{description}</p>
-					</div>
+import {
+    StyledAuthorInfo, StyledAvatar,
+    StyledCard,
+    StyledContent, StyledDesc,
+    StyledImg,
+    StyledInfoWrapper, StyledName,
+    StyledWrapper
+} from "./BlogCard.styled";
+import {Flex} from "../../SharedUI/Global";
 
-					<div>
-						<img src={avatar} alt={name} />
-						<div>
-							<p>{name}</p>
-							<p>{formatDistanceToNow(new Date(postedAt), { addSuffix: true })}</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	)
+export const BlogCardStyled = ({avatar, description, name, postedAt, poster, tag, title}) => {
+    return (
+        <StyledWrapper>
+            <StyledCard>
+                <div>
+                    <StyledImg src={poster} alt="card__image"/>
+                </div>
+                <StyledContent>
+                    <StyledInfoWrapper>
+                        <h2>{tag}</h2>
+                        <h3>{title}</h3>
+                        <StyledDesc  $textColor='green'>{description}</StyledDesc>
+                    </StyledInfoWrapper>
+
+                    <StyledAuthorInfo>
+                        <StyledAvatar src={avatar} alt={name}/>
+                        <div>
+                            <StyledName>{name}</StyledName>
+                            <p>
+                                {formatDistanceToNow(new Date(postedAt), {addSuffix: true})}
+                            </p>
+                        </div>
+                        <Flex $direction ='column'>
+                            <h2>ewqeqw</h2>
+                            <h2>ewqeqw</h2>
+                            <h2>ewqeqw</h2>
+                        </Flex>
+                    </StyledAuthorInfo>
+                </StyledContent>
+            </StyledCard>
+        </StyledWrapper>
+    )
 }
