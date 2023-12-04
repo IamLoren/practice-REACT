@@ -10,24 +10,51 @@
 // 8. Додати фільтр по стану  (all, active, completed)
 // 9. Додати підрахунок активних users
 import React from "react";
-import { Users } from "./components/Users/Users";
+import {Users} from "./components/Users/Users";
 
 export class App extends React.Component {
-  state = {
-    users: [
-      { name: "Alex", salary: 6000, id: 1 },
-      { name: "Kira", salary: 6500, id: 2 },
-      { name: "Irka", salary: 7500, id: 3 },
-    ],
-  };
-  render() {
-    const { users } = this.state;
-    return (
-      <div>
-        <Users usersInfo={users} />
-      </div>
-    );
-  }
+    state = {
+        users: [
+            {name: "Alex", salary: 6000, id: 1},
+            {name: "Kira", salary: 6500, id: 2},
+            {name: "Irka", salary: 7500, id: 3},
+        ],
+        name: '',
+        salary: ''
+    };
+
+    handleChange = ({target}) => {
+        const {name, value} = target
+        this.setState({[name]: value})
+    }
+
+    handleAddUser = () => {
+        if(!this.state.name || !this.state.salary){
+            return
+        }
+
+        this.setState(prevState => ({
+            users: [...prevState.users, {
+                id: crypto.randomUUID(),
+                name: prevState.name,
+                salary: prevState.salary
+            }],
+            name: '',
+            salary: ''
+        }))
+    }
+
+    render() {
+        const {users, name, salary} = this.state;
+        return (
+            <div>
+                <input name='name' value={name} onChange={this.handleChange} placeholder='Enter name'></input>
+                <input name='salary' value={salary} onChange={this.handleChange} placeholder='Enter salary'></input>
+                <button onClick={this.handleAddUser}>Add User</button>
+                <Users usersInfo={users}/>
+            </div>
+        );
+    }
 }
 
 // function App() {
