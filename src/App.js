@@ -9,9 +9,29 @@
 // 7. Зробити метод для перемикання стану (active / completed)
 // 8. Додати фільтр по стану  (all, active, completed)
 // 9. Додати підрахунок активних users
+import React from "react";
+import { Users } from "./components/Users/Users";
 
-function App() {
-	return <div></div>
+export class App extends React.Component {
+  state = {
+    users: [
+      { name: "Alex", salary: 6000, id: 1 },
+      { name: "Kira", salary: 6500, id: 2 },
+      { name: "Irka", salary: 7500, id: 3 },
+    ],
+  };
+  render() {
+    const { users } = this.state;
+    return (
+      <div>
+        <Users usersInfo={users} />
+      </div>
+    );
+  }
 }
 
-export default App
+// function App() {
+
+// }
+
+// export default App;
