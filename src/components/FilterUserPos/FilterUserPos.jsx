@@ -1,9 +1,10 @@
-export const FilterUserPos = ({ handleChangeFilter }) => {
+export const FilterUserPos = ({ handleChangeFilter, btnsArrayPosition }) => {
+
   return (
     <div>
-      <button onClick={() => handleChangeFilter('dev')}>dev</button>
-      <button onClick={() => handleChangeFilter('qa')}>qa</button>
-      <button onClick={() => handleChangeFilter('hr')}>hr</button>
+      {btnsArrayPosition.map(btn => {
+        return <button key={btn} onClick={() => handleChangeFilter(btn)}>{btn}</button>
+      })}
     </div>
   )
 };

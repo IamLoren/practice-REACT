@@ -27,7 +27,7 @@ export class App extends React.Component {
             { name: 'Kira', salary: 6500, id: 2, position: 'qa', status: 'onBench' },
             { name: 'Irka', salary: 7500, id: 3, position: 'hr', status: 'onBench' },
         ],
-        positions: ['dev', 'qa', 'hr'],
+        positions: ['dev', 'qa', 'hr', 'ceo', 'cto'],
         name: '',
         salary: '',
         position: '',
@@ -100,7 +100,7 @@ export class App extends React.Component {
                     ))}
                 </select>
                 <button onClick={this.handleAddUser}>Add User</button>
-                <FilterUserPos handleChangeFilter={this.handleChangeFilter} />
+                <FilterUserPos handleChangeFilter={this.handleChangeFilter} btnsArrayPosition={this.state.positions} />
                 <Users usersInfo={this.getFilterData()} delUser={this.handleDellUser} handleChangeStatus={this.handleChangeStatus} />
             </div>
         )
