@@ -1,14 +1,14 @@
 import React from 'react'
 import { Users } from './components/Users/Users'
-// Приклад даних - [{ id: '1', title: 'React is so cool', completed: false },{ id: '2', title: 'JS', completed: true }]
+
 //Plan
-// 1. Створити компонент для Users - [] - Oleh
-// 2. Створити компонент для SingleUser -[] -Oleh
-// 3. Створити стейт для Users - [] -Oleh
-// 4. Прокинути дані в компонент Users - [] -Oleh
-// 5. Зробити метод для видалення - [] - Lana
-// 6. Зробити метод для додавання - [] - Mari
-// 7. Зробити метод для перемикання стану (isWorking / onBench)
+// 1. Створити компонент для Users - [x] - Oleh
+// 2. Створити компонент для SingleUser -[x] -Oleh
+// 3. Створити стейт для Users - [x] -Oleh
+// 4. Прокинути дані в компонент Users - [x] -Oleh
+// 5. Зробити метод для видалення - [x] - Lana
+// 6. Зробити метод для додавання - [x] - Mari
+// 7. Зробити метод для перемикання стану (isWorking / onBench) - [x] - Olena
 // 8. Додати фільтр по position  (dev, qa, hr)
 // 9. Додати підрахунок  users котрі в роботі
 // 10. Переписати на форму додавання та винести в окремий компонент
