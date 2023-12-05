@@ -1,5 +1,5 @@
-import React from 'react'
-import { Users } from './components/Users/Users'
+import React from "react";
+import { Users } from "./components/Users/Users";
 
 //Plan
 // 1. Створити компонент для Users - [x] - Oleh
@@ -14,68 +14,92 @@ import { Users } from './components/Users/Users'
 // 10. Переписати на форму додавання та винести в окремий компонент
 // 11. Зробити можливість додати користувачів до улюблених)
 export class App extends React.Component {
-	state = {
-		users: [
-			{ name: 'Alex', salary: 6000, id: 1, position: 'dev' },
-			{ name: 'Kira', salary: 6500, id: 2, position: 'qa' },
-			{ name: 'Irka', salary: 7500, id: 3, position: 'hr' },
-		],
-		positions: ['dev', 'qa', 'hr'],
-		name: '',
-		salary: '',
-		position: '',
-	}
+  state = {
+    users: [
+      { name: "Alex", salary: 6000, id: 1, position: "dev", status: "onBench" },
+      { name: "Kira", salary: 6500, id: 2, position: "qa", status: "onBench" },
+      { name: "Irka", salary: 7500, id: 3, position: "hr", status: "onBench" },
+    ],
+    positions: ["dev", "qa", "hr"],
+    name: "",
+    salary: "",
+    position: "",
+  };
 
-	handleChangeSelect = ({ target }) => {
-		this.setState({ position: target.value })
-	}
-	handleDellUser = id => {
-		this.setState(prevState => ({
-			users: prevState.users.filter(user => user.id !== id),
-		}))
-	}
+  handleChangeSelect = ({ target }) => {
+    this.setState({ position: target.value });
+  };
+  handleDellUser = (id) => {
+    this.setState((prevState) => ({
+      users: prevState.users.filter((user) => user.id !== id),
+    }));
+  };
 
-	handleChange = ({ target }) => {
-		const { name, value } = target
-		this.setState({ [name]: value })
-	}
+  handleChange = ({ target }) => {
+    const { name, value } = target;
+    this.setState({ [name]: value });
+  };
 
-	handleAddUser = () => {
-		if (!this.state.name || !this.state.salary) {
-			return
-		}
+  handleAddUser = () => {
+    if (!this.state.name || !this.state.salary) {
+      return;
+    }
 
-		this.setState(prevState => ({
-			users: [
-				...prevState.users,
-				{
-					id: crypto.randomUUID(),
-					name: prevState.name,
-					salary: prevState.salary,
-					position: prevState.position,
-				},
-			],
-			name: '',
-			salary: '',
-		}))
-	}
+    this.setState((prevState) => ({
+      users: [
+        ...prevState.users,
+        {
+          id: crypto.randomUUID(),
+          name: prevState.name,
+          salary: prevState.salary,
+          position: prevState.position,
+          status: "onBench",
+        },
+      ],
+      name: "",
+      salary: "",
+    }));
+  };
 
-	render() {
-		const { users, name, salary, positions } = this.state
-		return (
-			<div>
-				<input name='name' value={name} onChange={this.handleChange} placeholder='Enter name'></input>
-				<input name='salary' value={salary} onChange={this.handleChange} placeholder='Enter salary'></input>
-				<select onChange={this.handleChangeSelect}>
-					{positions.map(el => (
-						<option key={el} value={el}>
-							{el}
-						</option>
-					))}
-				</select>
-				<button onClick={this.handleAddUser}>Add User</button>
-				<Users usersInfo={users} delUser={this.handleDellUser} />
-			</div>
-		)
-	}
+  handleChangeStatus = (id) => {
+    const newArr = this.state.users.map((user) =>
+      user.id === id
+        ? { ...user, status: user.status === "onBench" ? "onWork" : "onBench" }
+        : user
+    );
+    this.setState({ users: newArr });
+  };
+
+  render() {
+    const { users, name, salary, positions } = this.state;
+    return (
+      <div>
+        <input
+          name="name"
+          value={name}
+          onChange={this.handleChange}
+          placeholder="Enter name"
+        ></input>
+        <input
+          name="salary"
+          value={salary}
+          onChange={this.handleChange}
+          placeholder="Enter salary"
+        ></input>
+        <select onChange={this.handleChangeSelect}>
+          {positions.map((el) => (
+            <option key={el} value={el}>
+              {el}
+            </option>
+          ))}
+        </select>
+        <button onClick={this.handleAddUser}>Add User</button>
+        <Users
+          usersInfo={users}
+          delUser={this.handleDellUser}
+          handleChangeStatus={this.handleChangeStatus}
+        />
+      </div>
+    );
+  }
 }
