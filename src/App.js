@@ -1,7 +1,8 @@
-import React from 'react'
-import { Users } from './components/Users/Users'
-import { FilterUserPos } from './components/FilterUserPos/FilterUserPos'
-import { Counter } from './components/Counter/Counter'
+import React from "react";
+import { Users } from "./components/Users/Users";
+import { FilterUserPos } from "./components/FilterUserPos/FilterUserPos";
+import { Counter } from "./components/Counter/Counter";
+import { Form } from "./components/Form/Form";
 
 //Plan
 // 1. Створити компонент для Users - [x] - Oleh
@@ -38,94 +39,87 @@ import { Counter } from './components/Counter/Counter'
 //          - Передати в модалку дані для конкретного юзера
 
 export class App extends React.Component {
-	state = {
-		users: [
-			{ name: 'Alex', salary: 6000, id: 1, position: 'dev', status: 'onBench' },
-			{ name: 'Kira', salary: 6500, id: 2, position: 'qa', status: 'onBench' },
-			{ name: 'Irka', salary: 7500, id: 3, position: 'hr', status: 'onWork' },
-		],
-		positions: ['dev', 'qa', 'hr', 'ceo', 'cto'],
-		name: '',
-		salary: '',
-		position: '',
-		filterPosition: 'all',
-	}
+  state = {
+    users: [
+      { name: "Alex", salary: 6000, id: 1, position: "dev", status: "onBench" },
+      { name: "Kira", salary: 6500, id: 2, position: "qa", status: "onBench" },
+      { name: "Irka", salary: 7500, id: 3, position: "hr", status: "onWork" },
+    ],
+    positions: ["dev", "qa", "hr", "ceo", "cto"],
+    filterPosition: "all",
+  };
 
-	getFilterData = () => {
-		if (this.state.filterPosition === 'all') return this.state.users
-		return this.state.users.filter(item => item.position === this.state.filterPosition)
-	}
+  getFilterData = () => {
+    if (this.state.filterPosition === "all") return this.state.users;
+    return this.state.users.filter(
+      (item) => item.position === this.state.filterPosition
+    );
+  };
 
-	handleChangeFilter = filterValue => {
-		this.setState({ filterPosition: filterValue })
-	}
+  handleChangeFilter = (filterValue) => {
+    this.setState({ filterPosition: filterValue });
+  };
 
-	handleChangeSelect = ({ target }) => {
-		this.setState({ position: target.value })
-	}
-	handleDellUser = id => {
-		this.setState(prevState => ({
-			users: prevState.users.filter(user => user.id !== id),
-		}))
-	}
+  handleDellUser = (id) => {
+    this.setState((prevState) => ({
+      users: prevState.users.filter((user) => user.id !== id),
+    }));
+  };
 
-	handleChange = ({ target }) => {
-		const { name, value } = target
-		this.setState({ [name]: value })
-	}
+  handleAddUser = (data) => {
+    console.log(data);
+    if (!data.name || !data.salary) {
+      return;
+    }
 
-	handleAddUser = () => {
-		if (!this.state.name || !this.state.salary) {
-			return
-		}
+    this.setState((prevState) => ({
+      users: [
+        ...prevState.users,
+        {
+          id: crypto.randomUUID(),
+          name: data.name,
+          salary: data.salary,
+          position: data.position,
+          status: "onBench",
+        },
+      ],
+    }));
+  };
 
-		this.setState(prevState => ({
-			users: [
-				...prevState.users,
-				{
-					id: crypto.randomUUID(),
-					name: prevState.name,
-					salary: prevState.salary,
-					position: prevState.position,
-					status: 'onBench',
-				},
-			],
-			name: '',
-			salary: '',
-		}))
-	}
+  getCurrentWorkers = () => {
+    return this.state.users.reduce(
+      (acc, user) => (user.status === "onWork" ? acc + 1 : acc),
+      0
+    );
+  };
 
-	getCurrentWorkers = () => {
-		return this.state.users.reduce((acc, user) => (user.status === 'onWork' ? acc + 1 : acc), 0)
-	}
+  handleChangeStatus = (id) => {
+    const newArr = this.state.users.map((user) =>
+      user.id === id
+        ? { ...user, status: user.status === "onBench" ? "onWork" : "onBench" }
+        : user
+    );
+    this.setState({ users: newArr });
+  };
 
-	handleChangeStatus = id => {
-		const newArr = this.state.users.map(user =>
-			user.id === id ? { ...user, status: user.status === 'onBench' ? 'onWork' : 'onBench' } : user
-		)
-		this.setState({ users: newArr })
-	}
-
-	render() {
-		const workers = this.getCurrentWorkers()
-		const usersFiltered = this.getFilterData()
-		const { users, name, salary, positions } = this.state
-		return (
-			<div>
-				<input name='name' value={name} onChange={this.handleChange} placeholder='Enter name'></input>
-				<input name='salary' value={salary} onChange={this.handleChange} placeholder='Enter salary'></input>
-				<select onChange={this.handleChangeSelect}>
-					{positions.map(el => (
-						<option key={el} value={el}>
-							{el}
-						</option>
-					))}
-				</select>
-				<button onClick={this.handleAddUser}>Add User</button>
-				<FilterUserPos handleChangeFilter={this.handleChangeFilter} btnsArrayPosition={this.state.positions} />
-				<Counter countOfWorkers={workers} />
-				<Users usersInfo={usersFiltered} delUser={this.handleDellUser} handleChangeStatus={this.handleChangeStatus} />
-			</div>
-		)
-	}
+  render() {
+    const workers = this.getCurrentWorkers();
+    const usersFiltered = this.getFilterData();
+    const { positions } = this.state;
+    return (
+      <div>
+        <Form handleAddUser={this.handleAddUser} positions={positions} />
+        <FilterUserPos
+          handleChangeFilter={this.handleChangeFilter}
+          btnsArrayPosition={positions}
+        />
+        <Counter countOfWorkers={workers} />
+        <Users
+          usersInfo={usersFiltered}
+          delUser={this.handleDellUser}
+          handleChangeStatus={this.handleChangeStatus}
+        />
+      </div>
+    );
+  }
 }
