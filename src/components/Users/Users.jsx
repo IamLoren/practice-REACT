@@ -1,7 +1,7 @@
 import React from "react";
 import { SingleUser } from "../SingleUser/SingleUser";
 
-export const Users = ({ usersInfo, delUser, handleChangeStatus }) => {
+export const Users = ({ usersInfo, delUser, handleChangeStatus, handleShowModal }) => {
   return (
     <>
       <ul>
@@ -11,6 +11,7 @@ export const Users = ({ usersInfo, delUser, handleChangeStatus }) => {
             {...item}
             delUser={delUser}
             handleChangeStatus={handleChangeStatus}
+            handleShowModal={handleShowModal}
           />
         ))}
       </ul>

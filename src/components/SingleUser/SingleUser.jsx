@@ -8,7 +8,15 @@ export const SingleUser = ({
   status,
   delUser,
   handleChangeStatus,
+  handleShowModal,
 }) => {
+  const user = {
+    id,
+    name,
+    salary,
+    position,
+    status,
+  }
   return (
     <li>
       <div>
@@ -21,6 +29,7 @@ export const SingleUser = ({
         delete
       </button>
       <button onClick={() => handleChangeStatus(id)}>change status</button>
+      <button onClick={() => handleShowModal(user)}>Open Modal</button>
     </li>
   );
 };

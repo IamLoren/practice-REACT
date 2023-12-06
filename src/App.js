@@ -3,6 +3,7 @@ import { Users } from "./components/Users/Users";
 import { FilterUserPos } from "./components/FilterUserPos/FilterUserPos";
 import { Counter } from "./components/Counter/Counter";
 import { Form } from "./components/Form/Form";
+import { Modal } from "./components/Modal/Modal";
 
 //Plan
 // 1. Створити компонент для Users - [x] - Oleh
@@ -41,12 +42,14 @@ import { Form } from "./components/Form/Form";
 export class App extends React.Component {
   state = {
     users: [
-      //   { name: "Alex", salary: 6000, id: 1, position: "dev", status: "onBench" },
-      //   { name: "Kira", salary: 6500, id: 2, position: "qa", status: "onBench" },
-      //   { name: "Irka", salary: 7500, id: 3, position: "hr", status: "onWork" },
+      { name: "Alex", salary: 6000, id: 1, position: "dev", status: "onBench" },
+      { name: "Kira", salary: 6500, id: 2, position: "qa", status: "onBench" },
+      { name: "Irka", salary: 7500, id: 3, position: "hr", status: "onWork" },
     ],
     positions: ["dev", "qa", "hr", "ceo", "cto"],
     filterPosition: "all",
+    isOpenModal: false,
+    currentUser: null
   };
 
   componentDidMount() {
@@ -61,6 +64,20 @@ export class App extends React.Component {
     if (prevState.users !== this.state.users) {
       window.localStorage.setItem("USERS", JSON.stringify(this.state.users));
     }
+  }
+
+  handleShowUser = (user) => {
+    console.log(user);
+    this.setState({ currentUser: user })
+    this.handleShowModal()
+  }
+
+  handleShowModal = () => {
+    this.setState({ isOpenModal: true })
+  }
+
+  handleCloseModal = () => {
+    this.setState({ isOpenModal: false })
   }
 
   getFilterData = () => {
@@ -119,7 +136,7 @@ export class App extends React.Component {
   render() {
     const workers = this.getCurrentWorkers();
     const usersFiltered = this.getFilterData();
-    const { positions } = this.state;
+    const { positions, isOpenModal } = this.state;
     return (
       <div>
         <Form handleAddUser={this.handleAddUser} positions={positions} />
@@ -132,7 +149,12 @@ export class App extends React.Component {
           usersInfo={usersFiltered}
           delUser={this.handleDellUser}
           handleChangeStatus={this.handleChangeStatus}
+          handleShowModal={this.handleShowUser}
         />
+        {isOpenModal ? <Modal handleCloseModal={this.handleCloseModal}>
+          {this.state.currentUser.name}
+        </Modal> : null}
+
       </div>
     );
   }
