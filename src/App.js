@@ -4,6 +4,7 @@ import { fetchProduct } from './components/Services/api.js'
 import { LoadMoreBtn } from './components/LoadMoreBtn/LoadMoreBtn.jsx'
 import { Loader } from './components/Loader/Loader.jsx'
 import { Modal } from './components/Modal/Modal.jsx'
+import { Header } from './components/Header/Header.jsx'
 
 //Plan
 // 1. Роздивитись апі 'https://dummyjson.com/products'
@@ -71,6 +72,7 @@ export class App extends Component {
 	render() {
 		return (
 			<div>
+				<Header />
 				<Products products={this.state.productsData} />
 				{this.state.total > this.state.productsData.length ? <LoadMoreBtn click={this.handleLoadMore} /> : null}
 

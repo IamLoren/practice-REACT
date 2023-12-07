@@ -1,11 +1,11 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 export const StyledCard = styled.ul`
-  display: flex;
-  justify-content: space-between;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 350px));
+	justify-content: center;
+	gap: 20px;
+	margin: 50px auto;
 
-  margin: 0 auto;
-  width: 90%;
-  flex-wrap: wrap;
-  gap: 20px;
-  list-style: none;
-`;
+	width: 100%;
+	list-style: none;
+`
