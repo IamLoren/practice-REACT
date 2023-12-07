@@ -8,9 +8,6 @@ export const Products = ({ products = [] }) => {
         {products.map((item) => (
           <Card {...item} key={item.id} />
         ))}
-        <li>
-          <p>Test</p>
-        </li>
       </StyledCard>
     </div>
   );
