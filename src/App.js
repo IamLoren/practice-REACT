@@ -40,6 +40,17 @@ export class App extends Component {
 		total: 0,
 	}
 
+	myRef = React.createRef()
+
+	getSnapshotBeforeUpdate(prevProps, prevState) {
+		if (prevState.productsData.length !== this.state.productsData.length) {
+			const scrollPosition = this.myRef.current.offsetTop
+			console.log(scrollPosition)
+			return { scrollPosition }
+		}
+		return null
+	}
+
 	async componentDidMount() {
 		const { products, total } = await fetchProduct({
 			limit: 10,
@@ -47,7 +58,15 @@ export class App extends Component {
 		this.setState({ productsData: products, total })
 	}
 
-	async componentDidUpdate(_, prevState) {
+	async componentDidUpdate(_, prevState, snapshot) {
+		if (snapshot && prevState.productsData.length) {
+			console.log(snapshot)
+			const scrollPosition = this.myRef.current.offsetTop
+			window.scrollTo({
+				top: scrollPosition - 1000,
+				behavior: 'smooth',
+			})
+		}
 		if (prevState.skip !== this.state.skip) {
 			try {
 				this.setState({ loading: true })
@@ -76,6 +95,7 @@ export class App extends Component {
 				<Products products={this.state.productsData} />
 				{this.state.total > this.state.productsData.length ? <LoadMoreBtn click={this.handleLoadMore} /> : null}
 
+				<div style={{ visibility: 'hidden' }} ref={this.myRef}></div>
 				{this.state.loading ? <Loader /> : null}
 			</div>
 		)
