@@ -20,14 +20,14 @@ const StyledHeader = styled.header`
 	button{
 		background-color: transparent;
 		border: none;
-		transition: color 250ms ease-in-out;
-		color: darkgreen;
-		
-		&:hover, &:focus {
-			color: greenyellow;
-		}
 	}
 `
 
 const StyledCartIcon = styled(AiOutlineShoppingCart)`
+	transition: color 250ms ease-in-out;
+	color: darkgreen;
+
+	&:hover, &:focus {
+		color: greenyellow;
+	}
 `
