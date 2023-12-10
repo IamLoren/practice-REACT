@@ -3,34 +3,13 @@ import { Products } from './components/Products/Products.jsx'
 import { fetchProduct } from './components/Services/api.js'
 import { LoadMoreBtn } from './components/LoadMoreBtn/LoadMoreBtn.jsx'
 import { Loader } from './components/Loader/Loader.jsx'
-import { Modal } from './components/Modal/Modal.jsx'
 import { Header } from './components/Header/Header.jsx'
 
 //Plan
-// 1. Роздивитись апі 'https://dummyjson.com/products'
-// 2. Створити компоненти для відображення розмітки( мінімальні параметри)
-//      --- Компонент Products
-//      --- Компонент Card
-// 3. Створити папку services і файл api.js
-//      --- Встановити axios
-//      --- Створити baseUrl
-//      --- Додати функцію для запиту
-// 4. Створити стейт для даних
-//      --- Додати products, loading, error, skip, limit
-// 5. Виконати запит за даними
-//      --- Додати componentDidMount
-// 6. Додати кнопку load more і реалізувати її логіку
-//      --- Додати функцію для зміни skip
-//      --- Додати componentDidUpdate для реагування на skip
-// 7. Додати корзину та логіку по додавання в корзину
-//      --- Додати поле для корзини
-//      --- Додати компонент для корзини
-//      --- Додати функціх  для корзини (видалення додавання)
-//      --- Перенести компонент в модалку
-// 8. Додати можливість зберегти корзину в локал сторедж
-// 9. Підрахунок вартості товарів в корзині
-// 10. Заглушка якщо нема даних в корзині
-// 11. Додати кнопку відкриття модалки в хедер
+// 1. Refactoring to hooks
+// 2. Використати useState()
+// 3. Використати useEffect()
+// 4. Використати useRef()
 
 export class App extends Component {
 	state = {
