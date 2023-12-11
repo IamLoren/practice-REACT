@@ -1,6 +1,6 @@
 import React, { Component, useCallback, useEffect, useState } from "react";
 import { Products } from "./components/Products/Products.jsx";
-import { fetchProduct } from "./components/Services/api.js";
+import { fetchProduct } from "./components/services/api.js";
 import { LoadMoreBtn } from "./components/LoadMoreBtn/LoadMoreBtn.jsx";
 import { Loader } from "./components/Loader/Loader.jsx";
 import { Modal } from "./components/Modal/Modal.jsx";
