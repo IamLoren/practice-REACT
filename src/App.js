@@ -3,8 +3,11 @@ import { Products } from './components/Products/Products.jsx'
 import { fetchProduct } from './components/Services/api.js'
 import { LoadMoreBtn } from './components/LoadMoreBtn/LoadMoreBtn.jsx'
 import { Loader } from './components/Loader/Loader.jsx'
+import { Modal } from './components/Modal/Modal.jsx'
 import { Header } from './components/Header/Header.jsx'
-
+import styled from 'styled-components'
+import { RiDeleteBin2Line } from 'react-icons/ri'
+import { Cart } from './components/Cart/Cart.jsx'
 //Plan
 // 1. Refactoring to hooks
 // 2. Використати useState()
@@ -17,6 +20,8 @@ export class App extends Component {
 		skip: 0,
 		loading: false,
 		total: 0,
+		isCartOpen: false,
+		cartContent: [],
 	}
 
 	myRef = React.createRef()
@@ -67,15 +72,50 @@ export class App extends Component {
 		this.setState(prevState => ({ skip: prevState.skip + 10 }))
 	}
 
+	handleAddToCart = product => {
+		this.setState(prevState => ({
+			cartContent: [...prevState.cartContent, product],
+		}))
+	}
+	handleDeleteFromCart = id => {
+		// this.setState((prevState) => {
+		//   const id = product.id;
+		//   const { cartContent } = prevState;
+		//   return {
+		//     cartContent: cartContent.filter((product) => product.id !== id),
+		//   };
+		// });
+		this.setState(prevState => ({
+			cartContent: prevState.cartContent.filter(product => product.id !== id),
+		}))
+	}
+
+	handleCartToggle = () => {
+		this.setState(prevState => ({ isCartOpen: !prevState.isCartOpen }))
+	}
+	calculatePrice = () => this.state.cartContent.reduce((acc, product) => (acc += product.price), 0)
 	render() {
 		return (
 			<div>
-				<Header />
-				<Products products={this.state.productsData} />
+				<Header onCartClick={this.handleCartToggle} />
+				<Products products={this.state.productsData} onAddToCart={this.handleAddToCart} />
 				{this.state.total > this.state.productsData.length ? <LoadMoreBtn click={this.handleLoadMore} /> : null}
 
 				<div style={{ visibility: 'hidden' }} ref={this.myRef}></div>
 				{this.state.loading ? <Loader /> : null}
+				{this.state.isCartOpen ? (
+					<Modal handleCloseModal={this.handleCartToggle}>
+						{this.state.cartContent?.length ? (
+							<Cart
+								content={this.state.cartContent}
+								cartCalc={this.calculatePrice}
+								deleteFromCart={this.handleDeleteFromCart}
+							/>
+						) : (
+							<h1>Your cart is empty😥 </h1>
+						)}
+					</Modal>
+				) : null}
 			</div>
 		)
 	}
