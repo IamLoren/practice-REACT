@@ -12,7 +12,6 @@ import { Cart } from './components/Cart/Cart.jsx'
 // 1. Refactoring to hooks
 // 2. Використати useState()
 // 3. Використати useEffect()
-// 4. Використати useRef()
 
 export class App extends Component {
 	state = {
