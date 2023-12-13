@@ -5,17 +5,24 @@
 // 4. Створити Navbar, Layout
 // 5. Додати маршрути та заглушку на 404. А також використати Navigate для редіректу
 
-import { Route, Routes } from "react-router";
-import HomePage from "./pages/HomePage";
-import Products from "./pages/products";
+import { Route, Routes } from 'react-router'
+import HomePage from './pages/HomePage'
+import Products from './pages/products'
+import Layout from './components/Layout'
+import NotFound from './pages/NotFound'
+import { Cart } from './pages/Cart/Cart'
 
 const App = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/products" element={<Products />} />
-    </Routes>
-  );
-};
+	return (
+		<Routes>
+			<Route path='/' element={<Layout />}>
+				<Route index element={<HomePage />} />
+				<Route path='products' element={<Products />} />
+				<Route path='cart' element={<Cart />} />
+			</Route>
+			<Route path='*' element={<NotFound />} />
+		</Routes>
+	)
+}
 
-export default App;
+export default App

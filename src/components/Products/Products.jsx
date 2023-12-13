@@ -1,14 +1,18 @@
-import { Card } from "../Card/Card";
-import { StyledCard } from "./Product.styled";
+import { useContext } from 'react'
+import { Card } from '../Card/Card'
+import { StyledCard } from './Product.styled'
+import { CartContext } from '../../Context/CartProvider'
 
-export const Products = ({ products = [], onAddToCart }) => {
-  return (
-    <div>
-      <StyledCard>
-        {products.map((item) => (
-          <Card {...item} key={item.id} onAddToCart={()=>onAddToCart(item)} />
-        ))}
-      </StyledCard>
-    </div>
-  );
-};
+export const Products = ({ products = [] }) => {
+	const { handleAddToCart } = useContext(CartContext)
+
+	return (
+		<div>
+			<StyledCard>
+				{products.map(item => (
+					<Card {...item} key={item.id} onAddToCart={() => handleAddToCart(item)} />
+				))}
+			</StyledCard>
+		</div>
+	)
+}
