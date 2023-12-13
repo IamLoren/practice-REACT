@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { StyledModalContent, StyledModalWrapper } from "./Modal.styled";
+import { BrowserRouter } from "react-router-dom";
 
 export const Modal = ({ handleCloseModal, children }) => {
   useEffect(() => {
