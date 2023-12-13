@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import { MyContext } from '../../Context/ContextProvider'
 import { NavLink, useNavigate } from 'react-router-dom'
 
-export const Header = ({}) => {
+export const Header = () => {
 	const { user, logout, isOnline } = useContext(MyContext)
 
 	const navigate = useNavigate()
@@ -41,7 +41,11 @@ const StyledHeader = styled.header`
 	font-style: italic;
 	display: flex;
 	justify-content: space-between;
-
+	align-items: center;
+	div {
+		display: flex;
+		gap: 20px;
+	}
 	button {
 		background-color: transparent;
 		border: none;
