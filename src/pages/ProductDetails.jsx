@@ -1,18 +1,22 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { useParams } from 'react-router'
 import useHttp from '../hooks/useHttp'
 import { fetchProductById } from '../Services/api'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 const ProductDetails = () => {
 
   const { productId } = useParams()
   const [productById] = useHttp(fetchProductById, productId)
   console.log(productById)
+  const location = useLocation();
+  console.log(location)
+  const goBackRef = useRef(location.state?.from || '/products')
+
   if (!productById) { return <h2>Loading...</h2> }
   return (
     <>
-      <Link to='/products'>Go Back</Link>
+      <Link to={goBackRef.current}>Go Back</Link>
       <div>
         <div>
           <img src={productById.thumbnail} alt={productById.title} />

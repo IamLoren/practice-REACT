@@ -1,8 +1,9 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 
 
 export const Card = ({ title, description, price, thumbnail, onAddToCart, id }) => {
+  const location = useLocation();
   return (
     <StyledCard>
       <img src={thumbnail} alt='Title' width='300' />
@@ -10,7 +11,7 @@ export const Card = ({ title, description, price, thumbnail, onAddToCart, id }) 
       <p>{description}</p>
       <b>{price}$</b>
       <button onClick={onAddToCart}>Add to Cart</button>
-      <Link to={id.toString()}>Read more</Link>
+      <Link to={id.toString()} state={{ from: location }}>Read more</Link>
     </StyledCard>
   )
 }
