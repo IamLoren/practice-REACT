@@ -1,15 +1,18 @@
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-export const Card = ({ title, description, price, thumbnail, onAddToCart }) => {
-	return (
-		<StyledCard>
-			<img src={thumbnail} alt='Title' width='300' />
-			<h2>{title}</h2>
-			<p>{description}</p>
-			<b>{price}$</b>
-			<button onClick={ onAddToCart}>Add to Cart</button>
-		</StyledCard>
-	)
+
+export const Card = ({ title, description, price, thumbnail, onAddToCart, id }) => {
+  return (
+    <StyledCard>
+      <img src={thumbnail} alt='Title' width='300' />
+      <h2>{title}</h2>
+      <p>{description}</p>
+      <b>{price}$</b>
+      <button onClick={onAddToCart}>Add to Cart</button>
+      <Link to={id.toString()}>Read more</Link>
+    </StyledCard>
+  )
 }
 
 const StyledCard = styled.li`

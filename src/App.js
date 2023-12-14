@@ -16,6 +16,7 @@ import Products from './pages/products'
 import Layout from './components/Layout'
 import NotFound from './pages/NotFound'
 import { Cart } from './pages/Cart/Cart'
+import ProductDetails from './pages/ProductDetails'
 
 const App = () => {
 	return (
@@ -23,6 +24,7 @@ const App = () => {
 			<Route path='/' element={<Layout />}>
 				<Route index element={<HomePage />} />
 				<Route path='products' element={<Products />} />
+				<Route path='products/:productId' element={<ProductDetails />} />
 				<Route path='cart' element={<Cart />} />
 			</Route>
 			<Route path='*' element={<NotFound />} />

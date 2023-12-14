@@ -12,3 +12,9 @@ export const fetchProduct = async (configParams) => {
 
   return data;
 };
+
+// 'https://dummyjson.com/products/1'
+export const fetchProductById = async (id) => {
+  const { data } = await axios.get(`products/${id}`)
+  return data;
+}
