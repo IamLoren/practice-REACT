@@ -5,6 +5,7 @@ export const initialState = {
   total: 0,
   isCartOpen: false,
   cartContent: [],
+  limit: 10,
 };
 
 export const productReducer = (state, action) => {
@@ -29,6 +30,12 @@ export const productReducer = (state, action) => {
     case "RESET_DATA":
       return {
         ...state,
+        productsData: [],
+      };
+    case "CHANGE_LIMIT":
+      return {
+        ...state,
+        limit: payload,
         productsData: [],
       };
 

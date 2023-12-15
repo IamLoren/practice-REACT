@@ -26,7 +26,7 @@ import Layout from "./components/Layout";
 // import ProductDetails from "./pages/ProductDetails";
 import { lazy } from "react";
 const HomePage = lazy(() => import("./pages/HomePage"));
-const Products = lazy(() => import("./pages/products"));
+const Products = lazy(() => import("./pages/ProductsPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const ProductDetails = lazy(() => import("./pages/ProductDetails"));
 const Cart = lazy(() => import("./pages/Cart/Cart"));

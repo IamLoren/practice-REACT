@@ -8,8 +8,9 @@ import { useSearchParams } from "react-router-dom";
 
 const ProductsPage = () => {
   const [value, setValue] = useState("");
+
   const [state, dispatch] = useReducer(productReducer, initialState);
-  const { productsData, skip, loading, total } = state;
+  const { productsData, skip, loading, total, limit } = state;
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("query") || "";
 
@@ -19,7 +20,7 @@ const ProductsPage = () => {
       const { products, total } = query
         ? await fetchProductByQuery(query)
         : await fetchProduct({
-            limit: 10,
+            limit,
             skip,
           });
 
@@ -28,7 +29,7 @@ const ProductsPage = () => {
     } finally {
       dispatch({ type: "SET_LOADING", payload: false });
     }
-  }, [skip, query]);
+  }, [query, limit, skip]);
 
   useEffect(() => {
     getData();
@@ -51,6 +52,16 @@ const ProductsPage = () => {
         <input onChange={handleSetQuery} value={value} type="text" />
         <button onClick={handleSearch}>Search</button>
       </div>
+      <select
+        value={limit}
+        onChange={(event) => {
+          dispatch({ type: "CHANGE_LIMIT", payload: event.target.value });
+        }}
+      >
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+      </select>
       <Products products={productsData} />
       {total > productsData.length ? (
         <LoadMoreBtn click={handleLoadMore} />
