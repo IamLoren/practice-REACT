@@ -1,7 +1,12 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteTask } from "../../redux/tasks/action";
 
 export const DataList = () => {
+  const dispatch = useDispatch();
+  const handleDeleteItem = (id) => {
+    dispatch(deleteTask(id));
+  };
   const tasks = useSelector((state) => state.taskData.tasks);
   return (
     <div>
@@ -10,7 +15,7 @@ export const DataList = () => {
           <li key={task.id}>
             <input type="checkbox" />
             {task.title}
-            <button>Delette</button>
+            <button onClick={() => handleDeleteItem(task.id)}>Delette</button>
           </li>
         ))}
       </ul>
