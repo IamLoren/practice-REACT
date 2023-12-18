@@ -1,14 +1,19 @@
-import React from 'react'
+import React from "react";
+import { useSelector } from "react-redux";
 
 export const DataList = () => {
-	return (
-		<div>
-			<ul>
-				<li>1</li>
-				<li>3</li>
-				<li>5</li>
-				<li>1</li>
-			</ul>
-		</div>
-	)
-}
+  const tasks = useSelector((state) => state.taskData.tasks);
+  return (
+    <div>
+      <ul>
+        {tasks.map((task) => (
+          <li key={task.id}>
+            <input type="checkbox" />
+            {task.title}
+            <button>Delette</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
