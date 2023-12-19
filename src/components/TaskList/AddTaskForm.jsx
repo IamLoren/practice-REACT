@@ -9,7 +9,7 @@ export const AddTaskForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newTask = { id: nanoid(), complited: false, title: newTitle };
+    const newTask = { id: nanoid(), completed: false, title: newTitle };
     dispatch(addTasks(newTask));
     setNewTitle("");
   };

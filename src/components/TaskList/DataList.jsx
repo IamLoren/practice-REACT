@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectTasks } from "../../redux/tasks/selectors";
+import { selectFilter, selectTasks } from "../../redux/tasks/selectors";
 import { deleteTasks, toggleTasks } from "../../redux/tasks/slice";
 
 export const DataList = () => {
@@ -8,11 +8,25 @@ export const DataList = () => {
   const handleDeleteItem = (id) => {
     dispatch(deleteTasks(id));
   };
+
+
   const tasks = useSelector(selectTasks);
+  const filter = useSelector(selectFilter);
+  const getFiltered = () => {
+    switch (filter) {
+      case 'active':
+        return tasks.filter(item => !item.completed)
+      case 'completed':
+        return tasks.filter(item => item.completed)
+      default:
+        return tasks;
+    }
+  }
+
   return (
     <div>
       <ul>
-        {tasks.map((task) => (
+        {getFiltered().map((task) => (
           <li key={task.id}>
             <input
               type="checkbox"
