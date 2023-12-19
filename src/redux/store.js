@@ -1,39 +1,7 @@
-import { combineReducers } from "redux";
-import { taskReducer } from "./tasks/slice";
-import {
-  persistStore,
-  persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from "redux-persist";
-import storage from "redux-persist/lib/storage";
-import { configureStore } from "@reduxjs/toolkit";
+import { taskReducer } from './tasks/slice'
 
-const persistConfig = {
-  key: "root",
-  version: 1,
-  storage,
-  blacklist: ["filter"],
-};
-
-const persistedReducer = persistReducer(persistConfig, taskReducer);
+import { configureStore } from '@reduxjs/toolkit'
 
 export const store = configureStore({
-  reducer: { taskData: persistedReducer },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }),
-  devTools: true
-
-}
-
-);
-
-export const persistor = persistStore(store);
+	reducer: { taskData: taskReducer },
+})
