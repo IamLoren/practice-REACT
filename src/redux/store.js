@@ -1,6 +1,6 @@
 import { combineReducers, createStore } from "redux";
-import { taskReducer } from "./tasks/reducer";
 import { devToolsEnhancer } from "@redux-devtools/extension";
+import { taskReducer } from "./tasks/slice";
 
 const devtools = devToolsEnhancer();
 
