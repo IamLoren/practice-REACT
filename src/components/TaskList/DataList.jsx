@@ -30,7 +30,7 @@ export const DataList = () => {
           <li key={task.id}>
             <input
               type="checkbox"
-              value={task.completed}
+              checked={task.completed}
               onChange={() => dispatch(toggleTasks(task.id))}
             />
             {task.title}
