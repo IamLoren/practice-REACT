@@ -1,8 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectFilter, selectTasks } from "../../redux/tasks/selectors";
-import { toggleTasks } from "../../redux/tasks/slice";
-import { deleteTaskThunk } from "../../redux/tasks/operations";
+import { deleteTaskThunk, renameTaskThunk, toogleTasksThunk } from "../../redux/tasks/operations";
 
 export const DataList = () => {
   const dispatch = useDispatch();
@@ -23,6 +22,10 @@ export const DataList = () => {
     }
   };
 
+  const handleRename = (task) => {
+    const updatedTask = { ...task, title: prompt('Enter new value') }
+    dispatch(renameTaskThunk(updatedTask)) 
+  }
   return (
     <div>
       <ul>
@@ -31,9 +34,9 @@ export const DataList = () => {
             <input
               type="checkbox"
               checked={task.completed}
-              onChange={() => dispatch(toggleTasks(task.id))}
+              onChange={() => dispatch(toogleTasksThunk(task))}
             />
-            {task.title}
+            <p onClick={()=>handleRename(task)}>{task.title}</p>
             <button onClick={() => handleDeleteItem(task.id)}>Delette</button>
           </li>
         ))}

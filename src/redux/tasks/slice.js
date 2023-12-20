@@ -1,5 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addTaskThunk, deleteTaskThunk, fetchTasksThunk } from "./operations";
+import {
+  addTaskThunk,
+  deleteTaskThunk,
+  fetchTasksThunk,
+  renameTaskThunk,
+  toogleTasksThunk,
+} from "./operations";
 
 const initialState = {
   tasks: [],
@@ -30,19 +36,25 @@ const tasksSlice = createSlice({
       })
       .addCase(addTaskThunk.fulfilled, (state, { payload }) => {
         state.tasks.push(payload);
+      })
+      .addCase(toogleTasksThunk.fulfilled, (state, { payload }) => {
+        const task = state.tasks.find((item) => item.id === payload.id);
+        task.completed = !task.completed;
+      })
+      .addCase(renameTaskThunk.fulfilled, (state, { payload }) => {
+        const taskIndex = state.tasks.findIndex(
+          (item) => item.id === payload.id
+        );
+        state.tasks.splice(taskIndex, 1, payload);
       });
   },
 
   reducers: {
-    toggleTasks: (state, action) => {
-      const task = state.tasks.find((item) => item.id === action.payload);
-      task.completed = !task.completed;
-    },
     filterTask: (state, { payload }) => {
       state.filter = payload;
     },
   },
 });
 
-export const { toggleTasks, filterTask } = tasksSlice.actions;
+export const { filterTask } = tasksSlice.actions;
 export const taskReducer = tasksSlice.reducer;

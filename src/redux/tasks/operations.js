@@ -38,3 +38,30 @@ export const addTaskThunk = createAsyncThunk(
     }
   }
 );
+
+export const toogleTasksThunk = createAsyncThunk(
+  "toogleTasks",
+  async (task, thunkAPI) => {
+    try {
+      const { data } = await axios.put(`tasks/${task.id}`, {
+        ...task,
+        completed: !task.completed,
+      });
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const renameTaskThunk = createAsyncThunk(
+  "renameTask",
+  async (task, thunkAPI) => {
+    try {
+      const { data } = await axios.put(`tasks/${task.id}`, task);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
