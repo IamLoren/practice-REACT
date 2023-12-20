@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { nanoid } from "nanoid";
-import { addTasks } from "../../redux/tasks/slice";
+// import { nanoid } from "nanoid";
+import { addTaskThunk } from "../../redux/tasks/operations";
 
 export const AddTaskForm = () => {
   const [newTitle, setNewTitle] = useState("");
@@ -9,8 +9,7 @@ export const AddTaskForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newTask = { id: nanoid(), completed: false, title: newTitle };
-    dispatch(addTasks(newTask));
+    dispatch(addTaskThunk(newTitle));
     setNewTitle("");
   };
 
