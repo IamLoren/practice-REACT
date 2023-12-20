@@ -23,7 +23,7 @@ export const DataList = () => {
   };
 
   const handleRename = (task) => {
-    const updatedTask = { ...task, title: prompt('Enter new value') }
+    const updatedTask = { ...task, title: prompt('Enter new value') || task.title }
     dispatch(renameTaskThunk(updatedTask)) 
   }
   return (
