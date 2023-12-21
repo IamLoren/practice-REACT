@@ -1,8 +1,10 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
+  selectCurrent,
   selectFilter,
   selectFilteredTasks,
+  selectIsLoading,
   selectTasks,
 } from "../../redux/tasks/selectors";
 import {
@@ -13,8 +15,9 @@ import {
 
 export const DataList = () => {
   const tasks = useSelector(selectFilteredTasks);
-
+  const loading = useSelector(selectIsLoading)
   const dispatch = useDispatch();
+  const currentTask = useSelector(selectCurrent)
   const handleDeleteItem = (id) => {
     dispatch(deleteTaskThunk(id));
   };
@@ -50,7 +53,7 @@ export const DataList = () => {
               onChange={() => dispatch(toogleTasksThunk(task))}
             />
             <p onClick={() => handleRename(task)}>{task.title}</p>
-            <button onClick={() => handleDeleteItem(task.id)}>Delette</button>
+            <button disabled={task.id === currentTask && loading} onClick={() => handleDeleteItem(task.id)}>{task.id === currentTask && loading ? 'deleting....' : 'delete'}</button>
           </li>
         ))}
       </ul>

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { setCurrentTask } from "./slice";
 
 axios.defaults.baseURL = "https://6580bf4d3dfdd1b11c42098a.mockapi.io";
 

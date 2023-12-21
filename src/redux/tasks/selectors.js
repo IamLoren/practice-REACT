@@ -4,6 +4,7 @@ export const selectTasks = (state) => state.taskData.tasks;
 export const selectFilter = (state) => state.taskData.filter;
 export const selectIsLoading = (state) => state.taskData.isLoading;
 export const selectError = (state) => state.taskData.error;
+export const selectCurrent = (state) => state.taskData.currentTask;
 
 export const selectFilteredTasks = createSelector(
   [selectFilter, selectTasks],
