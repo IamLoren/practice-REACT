@@ -20,6 +20,9 @@ export const selectFilteredTasks = createSelector(
   }
 );
 
+export const selectUncompliteTasks = createSelector([selectTasks], (tasks) => {
+  return tasks.reduce((acc, task) => (!task.completed ? acc + 1 : acc), 0);
+});
 // export const selectFilteredTasks = (state) => {
 //   const filter = selectFilter(state);
 //   const tasks = selectTasks(state);
