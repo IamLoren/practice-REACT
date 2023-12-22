@@ -1,4 +1,7 @@
-import React from 'react'
+import React from "react";
+import AddForm from "./AddForm";
+import AuthAuthor from "./AuthAuthor";
+import PostList from "./PostList";
 // План
 // - Розбити по компонентам розмітку
 // - Додати слайс для постів
@@ -8,26 +11,14 @@ import React from 'react'
 // - Редагування
 
 export const Posts = () => {
-	return (
-		<div>
-			{/* Форма додавання поста */}
-			<form>
-				<input />
-				<input />
-				<button>Add post</button>
-			</form>
-
-			{/* Поле для авторизації автора */}
-			<div>
-				<input />
-				<button>Login</button>
-			</div>
-			{/* Пости з даними */}
-			<ul>
-				<li>Тут буде ваш текст</li>
-				<li>Тут буде ваш текст</li>
-				<li>Тут буде ваш текст</li>
-			</ul>
-		</div>
-	)
-}
+  return (
+    <div>
+      {/* Форма додавання поста */}
+      <AddForm />
+      {/* Поле для авторизації автора */}
+      <AuthAuthor />
+      {/* Пости з даними */}
+      <PostList />
+    </div>
+  );
+};
