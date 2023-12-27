@@ -3,28 +3,12 @@ import styled from "styled-components";
 
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginThunk, logoutThunk, registerThunk } from "../redux/auth/operations";
+import { logoutThunk } from "../redux/auth/operations";
 import { selectisLoggedIn } from "../redux/auth/selectors";
 
 const Header = () => {
   const dispatch = useDispatch()
   const isLoggedIn = useSelector(selectisLoggedIn)
-
-  const handleRegister = () => {
-    dispatch(registerThunk({
-      name: "Adrian Cross",
-      email: "acrosssdfsfs12@mail.com",
-      password: "examplepdsdfghdwd12345"
-}))
-  }
-  const handleLogin = () => {
-    dispatch(loginThunk({
-      name: "Adrian Cross",
-      email: "acrosssdfsfs12@mail.com",
-      password: "examplepdsdfghdwd12345"
-}))
-  }
-
 
   return (
     <StyledBox>
