@@ -31,14 +31,14 @@ const Header = () => {
       <div>Header</div>
       <div>
         {!isLoggedIn && <>
-          <button onClick={handleRegister}>Registration</button>
-          <button onClick={handleLogin}>Login</button>
+          <NavLink to='/register'>Registration</NavLink>
+          <NavLink style={{marginLeft: '5px'}} to='/login'>Login</NavLink>
         </>}
         {isLoggedIn&&<><button onClick={()=> dispatch(logoutThunk())}>Logout</button></>}     
       </div>
       <nav>
         <NavLink to="/">Home</NavLink>
-        <NavLink to="/todos">ToDo</NavLink>
+        <NavLink style={{marginLeft: '5px'}} to="/todos">ToDo</NavLink>
       </nav>
     </StyledBox>
   );
